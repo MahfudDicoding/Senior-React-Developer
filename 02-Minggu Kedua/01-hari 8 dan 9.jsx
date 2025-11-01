@@ -34,15 +34,13 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  // ✅ Langsung inisialisasi state dengan data dari localStorage
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
-  // 🔹 Ambil data todo dari localStorage saat pertama kali render
-  useEffect(() => {
-    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    setTodos(savedTodos);
-  }, []);
-
-  // 🔹 Simpan ke localStorage setiap kali todos berubah
+  // ✅ Simpan ke localStorage setiap kali todos berubah
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -87,5 +85,6 @@ export default App;
 | Tambahkan `useEffect` untuk load data | ☐      |
 | Tambahkan `useEffect` untuk save data | ☐      |
 | Tes persistensi (refresh browser)     | ☐      |
+
 
 */
