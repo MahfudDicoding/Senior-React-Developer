@@ -1,6 +1,7 @@
 # 📅 Hari 10–11: Menandai Todo Selesai (Checkbox)
 
 ## 🎯 Tujuan
+
 - Setiap todo bisa diberi status selesai / belum.
 - Ketika todo selesai → teks berubah gaya (misalnya coret).
 - Semua status tetap tersimpan di localStorage (karena kamu sudah punya useEffect!).
@@ -10,6 +11,7 @@
 ## 🧩 Langkah-langkah
 
 ### 1️⃣ Ubah struktur todos jadi objek
+
 Sebelumnya `todos` kamu berupa array of string, contoh:
 
 ```js
@@ -28,6 +30,7 @@ Sekarang ubah jadi array of object:
 ---
 
 ### 2️⃣ Ubah fungsi addTodo di App.jsx
+
 ```js
 const addTodo = (newTodo) => {
   if (!newTodo.trim()) return;
@@ -39,6 +42,7 @@ const addTodo = (newTodo) => {
 ---
 
 ### 3️⃣ Tambahkan fungsi toggleTodo
+
 ```js
 const toggleTodo = (index) => {
   const updatedTodos = todos.map((todo, i) =>
@@ -51,6 +55,7 @@ const toggleTodo = (index) => {
 ---
 
 ### 4️⃣ Kirim toggleTodo ke TodoList
+
 ```js
 <TodoList todos={todos} onToggle={toggleTodo} />
 ```
@@ -58,6 +63,7 @@ const toggleTodo = (index) => {
 ---
 
 ### 5️⃣ Ubah TodoList.jsx
+
 ```js
 import ListItem from "./ListItem";
 
@@ -82,31 +88,53 @@ export default TodoList;
 ---
 
 ### 6️⃣ Ubah ListItem.jsx
+
 ```js
 export default function ListItem({ text, completed, onToggle }) {
-  return (
-    <li
-      onClick={onToggle}
-      style={{
-        cursor: "pointer",
-        textDecoration: completed ? "line-through" : "none",
-      }}
-    >
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={onToggle}
-        style={{ marginRight: "8px" }}
-      />
-      {text}
-    </li>
-  );
+    const handleCheckboxChange = (e) => {
+        e.stopPropagation(); // ✅ Mencegah double toggle
+        onToggle();
+    };
+
+    return (
+        <li
+            style={{
+                cursor: "pointer",
+                textDecoration: completed ? "line-through" : "none",
+            }}
+        >
+            <input
+                type="checkbox"
+                checked={completed}
+                onChange={handleCheckboxChange} // ✅ Gunakan handler baru
+                style={{ marginRight: "8px" }}
+            />
+            <span onClick={onToggle}>{text}</span> {/* ✅ Pindah onClick ke span */}
+        </li>
+    );
 }
 ```
 
 ---
 
-### 7️⃣ Tes Aplikasi
+### 7. Ubah ListItem.jsx
+
+```js
+<input
+    type="text"
+    id="todo-input" // ✅ Tambahkan id
+    name="todo"     // ✅ Tambahkan name
+    placeholder='Tambahkan Tugas...'
+    value={inputValue}
+    onChange={(e) => setInputValue(e.target.value)}
+/>
+
+```
+
+---
+
+### 8. Tes Aplikasi
+
 1. Jalankan `npm run dev`
 2. Tambahkan beberapa todo
 3. Klik checkbox → todo dicoret ✨
@@ -115,6 +143,7 @@ export default function ListItem({ text, completed, onToggle }) {
 ---
 
 ## ✅ Checklist Hari 10–11
+
 | Langkah | Status |
 |----------|--------|
 | Ubah todos jadi array of object | ☐ |

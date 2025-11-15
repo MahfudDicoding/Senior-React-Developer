@@ -70,6 +70,12 @@ export default TodoList;
 ? 6️⃣ Ubah ListItem.jsx
 
 export default function ListItem({ text, completed, onToggle }) {
+
+  const handleCheckboxChange = (e) => {
+    e.stopPropagation(); // Mencegah event bubbling ke li
+    onToggle();
+  };
+
   return (
     <li
       onClick={onToggle}
@@ -81,15 +87,26 @@ export default function ListItem({ text, completed, onToggle }) {
       <input
         type="checkbox"
         checked={completed}
-        onChange={onToggle}
+        onChange={handleCheckboxChange} // ✅ Gunakan handler baru
         style={{ marginRight: "8px" }}
       />
-      {text}
+      <span onClick={onToggle}>{text}</span>
     </li>
   );
 }
 
-? 7️⃣ Tes Aplikasi
+? 7. TodoForm.jsx - Perbaiki warning form
+
+<input
+    type="text"
+    id="todo-input" // ✅ Tambahkan id
+    name="todo"     // ✅ Tambahkan name
+    placeholder='Tambahkan Tugas...'
+    value={inputValue}
+    onChange={(e) => setInputValue(e.target.value)}
+/>
+
+? 8. Tes Aplikasi
 
     ! - Jalankan npm run dev
 
