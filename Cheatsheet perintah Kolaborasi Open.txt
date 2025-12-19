@@ -136,4 +136,3 @@ Cheatsheet perintah Kolaborasi Open Source GitHub
 	# Hapus branch yang sudah tidak terpakai
 		git branch -D tambah-useeffect-localstorage
 
-Token GitHub(MahfudW) Junior-data-engineer-mentorship-program: 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
