@@ -15,7 +15,7 @@ TODO: 📅 Hari 12–13: Styling Modern dengan Tailwind CSS
 
 ! Jalankan perintah di terminal proyek kamu:
 
-npm install -D tailwindcss postcss autoprefixer
+npm install -D tailwindcss@3 postcss autoprefixer
 npx tailwindcss init -p
 
 * 2️⃣ Konfigurasi file tailwind.config.js

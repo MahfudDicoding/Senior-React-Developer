@@ -1,0 +1,139 @@
+Cheatsheet perintah Kolaborasi Open Source GitHub
+
+1. Kalau ingin push ke GitHub setelah selesai update kode project
+
+	git add .
+	git commit -m "Menambahkan fitur X"
+	git push
+
+	CATATAN: isi ini "Menambahkan fitur X" bisa diganti dengan deskripsi yang sesuai apa yang di-kommit.
+
+2. Cara Update Fork (Sync dengan Upstream):
+
+	Untuk AhmedTsar:
+
+	bash# 1. Masuk ke folder
+	cd ~/projects/ahmedtsar/Daftar-Tugas
+
+	# 2. Fetch perubahan dari upstream (repo asli)
+	git fetch upstream
+
+	# 3. Checkout ke branch main
+	git checkout main
+
+	# 4. Merge perubahan dari upstream
+	git merge upstream/main
+
+	# 5. Push ke fork AhmedTsar di GitHub
+	git push origin main
+
+	Untuk MahfudW:
+
+	bash# Sama seperti di atas
+	cd ~/projects/mahfudw/Daftar-Tugas
+
+	git fetch upstream
+	git checkout main
+	git merge upstream/main
+	git push origin main
+
+3. Sebelum push, selalu verifikasi dulu:
+
+	bash# Cek identity saat ini
+	git config user.name
+	git config user.email
+
+	# Cek remote URL (pastikan SSH alias benar)
+	git remote -v
+
+	# Set Git Config per Repository
+	   Masuk ke folder repository, lalu set identity:
+
+	(misal) Masuk ke terminal project : cd Daftar-Tugas
+
+	# Set untuk AhmedTsar
+	git config user.name "AhmedTsar"
+	git config user.email "email-ahmedtsar@example.com"
+
+4. Workflow Kontribusi 
+
+	- Dari AhmedTsar
+
+		1. Masuk ke folder project AhmedTsar
+			cd ~/projects/ahmedtsar/Daftar-Tugas
+
+		2. Update dari upstream (repo asli)
+			git fetch upstream
+			git checkout main
+			git merge upstream/main
+
+	#Note: "Update dari upstream" lewati Langkah ini kalau sudah update.
+
+		# 3. Buat branch baru untuk fitur
+			git checkout -b fitur-login
+
+		# 4. Buat perubahan (edit file di VSCode)
+			# Contoh: tambah file login.html
+
+		# 5. Stage dan Commit
+			git add .
+			git commit -m "Menambahkan halaman login"
+
+		# 6. Push ke fork AhmedTsar
+			git push origin fitur-login
+
+	- Dari MahfudW
+
+		# 1. Masuk ke folder project MahfudW
+			cd ~/projects/mahfudw/Daftar-Tugas
+
+		# 2. Update dari upstream (repo asli)
+			git fetch upstream
+			git checkout main
+			git merge upstream/main
+
+		#Note: "Update dari upstream" lewati Langkah ini kalau sudah update.
+
+		# 3. Buat branch baru untuk fitur
+			git checkout -b fitur-login
+
+		# 4. Buat perubahan (edit file di VSCode)
+			# Contoh: tambah file login.html
+
+		# 5. Stage dan Commit
+			git add .
+			git commit -m "Menambahkan halaman login"
+
+		# 6. Push ke fork AhmedTsar
+			git push origin fitur-login
+
+5. Buka GitHub, buat Pull Request dari fork AhmedTsar ke MahfudDicoding/Daftar-Tugas
+
+	- Buka browser → GitHub mahfuddicoding
+   	- Akan ada notifikasi "Compare & pull request"
+   	- Klik → Isi deskripsi → `Create pull request`
+
+6. JANGAN LUPA, LAKUKAN MERGE DI GITHUB UTAMA
+
+
+7. Update repo local sebagai pemilik utama untuk dapat perubahan terbaru:
+
+	cd ~/projects/mahfuddicoding/Daftar-Tugas
+		git checkout main
+		git pull origin main
+
+# Kalau ada perubahan lokal yang belum di-commit
+	1. Solusi tercepat: git checkout -- package.json package-lock.json
+	2. Lalu: "git merge upstream/main" atau "git pull origin main" untuk pemilik repo Utama
+	3. Lalu "npm cache clean --force" lalu "rm -rf node_modules package-lock.json" lalu "npm install"
+
+
+6. Kalau Anda sudah selesai dengan branch tambah-useeffect-localstorage dan Pull Request sudah di-merge, bisa hapus branch lokal:
+
+	bash# Pindah ke main dulu
+		git checkout main
+
+	# Hapus branch yang sudah tidak terpakai
+		git branch -D tambah-useeffect-localstorage
+
+Token GitHub(MahfudW) Junior-data-engineer-mentorship-program: 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
