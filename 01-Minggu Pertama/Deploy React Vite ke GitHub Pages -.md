@@ -164,9 +164,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
 
-&nbsp; base: '/nama-repo/', // ← GANTI dengan nama repo Anda!
+       base: '/nama-repo/', // ← GANTI dengan nama repo Anda!
 
-&nbsp; plugins: \[react()],
+       plugins: \[react()],
 
 })
 
@@ -254,65 +254,35 @@ touch .github/workflows/deploy.yml
 
 name: Deploy to GitHub Pages
 
-
-
 on:
-
-&nbsp; push:
-
-&nbsp;   branches: \[ "main" ]
-
-
+  push:
+    branches: [ "main" ]
 
 jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-&nbsp; build-and-deploy:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-&nbsp;   runs-on: ubuntu-latest
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
 
+      - name: Install dependencies
+        run: npm ci
 
+      - name: Build project
+        run: npm run build
 
-&nbsp;   steps:
-
-&nbsp;     - name: Checkout code
-
-&nbsp;       uses: actions/checkout@v4
-
-
-
-&nbsp;     - name: Setup Node.js
-
-&nbsp;       uses: actions/setup-node@v4
-
-&nbsp;       with:
-
-&nbsp;         node-version: '20.x'
-
-&nbsp;         cache: 'npm'
-
-
-
-&nbsp;     - name: Install dependencies
-
-&nbsp;       run: npm ci
-
-
-
-&nbsp;     - name: Build project
-
-&nbsp;       run: npm run build
-
-
-
-&nbsp;     - name: Deploy to GitHub Pages
-
-&nbsp;       uses: peaceiris/actions-gh-pages@v4
-
-&nbsp;       with:
-
-&nbsp;         github\_token: ${{ secrets.GITHUB\_TOKEN }}
-
-&nbsp;         publish\_dir: ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 
 ```
 
@@ -326,7 +296,7 @@ jobs:
 
 ```bash
 
-npm run buil
+npm run build
 
 ```
 
@@ -634,11 +604,11 @@ rm -rf temp
 
 3\. Common issues:
 
-&nbsp;  - `npm install failed` → Cek `package.json` syntax
+        - `npm install failed` → Cek `package.json` syntax
 
-&nbsp;  - `npm run build failed` → Cek `vite.config.js` syntax
+        - `npm run build failed` → Cek `vite.config.js` syntax
 
-&nbsp;  - `Deploy failed` → Cek permissions (Step 2: Aktifkan GitHub Actions Permissions)
+        - `Deploy failed` → Cek permissions (Step 2: Aktifkan GitHub Actions Permissions)
 
 
 
@@ -712,13 +682,13 @@ Setelah itu, GitHub Actions akan bisa deploy otomatis.
 
 {
 
-&nbsp; "scripts": {
+       "scripts": {
 
-&nbsp;   "build": "vite build"
+         "build": "vite build"
 
-&nbsp;   "deploy": "gh-pages -d dist"
+        "deploy": "gh-pages -d dist"
 
-&nbsp; }
+       }
 
 }
 
@@ -728,13 +698,13 @@ Setelah itu, GitHub Actions akan bisa deploy otomatis.
 
 {
 
-&nbsp; "scripts": {
+       "scripts": {
 
-&nbsp;   "build": "vite build",
+         "build": "vite build",
 
-&nbsp;   "deploy": "gh-pages -d dist"
+         "deploy": "gh-pages -d dist"
 
-&nbsp; }
+       }
 
 }
 
